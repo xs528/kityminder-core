@@ -51,6 +51,7 @@
     "grunt-contrib-watch": "^1.0.0",
     "grunt-module-dependence": "~0.2.1",
     "grunt-replace": "~0.8.0",
+    "load-grunt-tasks": "^3.1.0",
     "uglify-js": "^2.8.29"
   },
   "config": {

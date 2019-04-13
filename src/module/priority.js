@@ -13,15 +13,15 @@ define(function(require, exports, module) {
 
         // Designed by Akikonata
         // [MASK, BACK]
-        var PRIORITY_COLORS = [null, ['#FF1200', '#840023'], // 1 - red
-            ['#0074FF', '#01467F'], // 2 - blue
-            ['#00AF00', '#006300'], // 3 - green
-            ['#FF962E', '#B25000'], // 4 - orange
-            ['#A464FF', '#4720C4'], // 5 - purple
-            ['#A3A3A3', '#515151'], // 6,7,8,9 - gray
-            ['#A3A3A3', '#515151'],
-            ['#A3A3A3', '#515151'],
-            ['#A3A3A3', '#515151'],
+        var PRIORITY_COLORS = [null, ['#e64248', '#840023'], // 1 - red
+            ['#f9b62a', '#01467F'], // 2 - blue
+            ['#5565fb', '#006300'], // 3 - green
+            ['#bb3aac', '#B25000'], // 4 - orange
+            ['#2bcc5b', '#4720C4'], // 5 - purple
+            ['#25b7e6', '#515151'], // 6,7,8,9 - gray
+            ['#80acb4', '#515151'],
+            ['#83989b', '#515151'],
+            ['#8e9698', '#515151'],
         ]; // hue from 1 to 5
 
         // jscs:disable maximumLineLength
@@ -48,19 +48,19 @@ define(function(require, exports, module) {
             create: function() {
                 var white, back, mask, number; // 4 layer
 
-                white = new kity.Path().setPathData(MASK_PATH).fill('white');
-                back = new kity.Path().setPathData(BACK_PATH).setTranslate(0.5, 0.5);
-                mask = new kity.Path().setPathData(MASK_PATH).setOpacity(0.8).setTranslate(0.5, 0.5);
+                // white = new kity.Path().setPathData(MASK_PATH).fill('white');
+                // mask = new kity.Path().setPathData(MASK_PATH).setOpacity(0.8).setTranslate(0.5, 0.5);
+                back = new kity.Circle(10).setTranslate(10, 10);
 
                 number = new kity.Text()
-                    .setX(this.width / 2 - 0.5).setY(this.height / 2)
+                    .setX(this.width / 2).setY(this.height / 2 - 1)
                     .setTextAnchor('middle')
                     .setVerticalAlign('middle')
-                    .setFontItalic(true)
                     .setFontSize(12)
+                    .setFontBold(true)
                     .fill('white');
 
-                this.addShapes([back, mask, number]);
+                this.addShapes([back, number]);
                 this.mask = mask;
                 this.back = back;
                 this.number = number;
@@ -74,8 +74,7 @@ define(function(require, exports, module) {
                 var color = PRIORITY_COLORS[value];
 
                 if (color) {
-                    back.fill(color[1]);
-                    mask.fill(color[0]);
+                    back.fill(color[0]);
                 }
 
                 number.setContent(value);
