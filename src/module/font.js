@@ -150,8 +150,15 @@ define(function(require, exports, module) {
                 },
                 queryValue: function(km) {
                     var node = km.getSelectedNode();
-                    if (node) return node.getData('font-size');
-                    return null;
+                    if (!node) return null;
+
+                    var fontSize = node.getData('font-size');
+                    if (fontSize) {
+                        return fontSize;
+                    } else {
+                        var themeItems = km.getThemeItems()
+                        return themeItems[node.type + '-font-size']
+                    }
                 }
             })
         }

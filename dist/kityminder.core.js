@@ -1,6 +1,6 @@
 /*!
  * ====================================================
- * Kity Minder Core - v1.4.50 - 2019-04-13
+ * Kity Minder Core - v1.4.50 - 2019-04-15
  * https://github.com/fex-team/kityminder-core
  * GitHub: https://github.com/fex-team/kityminder-core.git 
  * Copyright (c) 2019 Baidu FEX; Licensed BSD-3-Clause
@@ -5447,8 +5447,14 @@ _p[47] = {
                     },
                     queryValue: function(km) {
                         var node = km.getSelectedNode();
-                        if (node) return node.getData("font-size");
-                        return null;
+                        if (!node) return null;
+                        var fontSize = node.getData("font-size");
+                        if (fontSize) {
+                            return fontSize;
+                        } else {
+                            var themeItems = km.getThemeItems();
+                            return themeItems[node.type + "-font-size"];
+                        }
                     }
                 })
             }
@@ -8181,7 +8187,7 @@ _p[66] = {
         function xhrLoadImage(info, callback) {
             return Promise(function(resolve, reject) {
                 var xmlHttp = new XMLHttpRequest();
-                xmlHttp.open("GET", info.url + "?_=" + Date.now(), true);
+                xmlHttp.open("GET", info.url + "&_=" + Date.now(), true);
                 xmlHttp.responseType = "blob";
                 xmlHttp.onreadystatechange = function() {
                     if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
@@ -9189,7 +9195,7 @@ _p[77] = {
                 "sub-radius": 5,
                 "sub-space": 5,
                 "connect-color": hsl(h, 37, 60),
-                "connect-width": 1,
+                "connect-width": 2,
                 "connect-radius": 5,
                 "selected-stroke": hsl(h, 26, 30),
                 "selected-stroke-width": "3",
@@ -9209,7 +9215,7 @@ _p[77] = {
             red: 0,
             soil: 25,
             green: 122,
-            blue: 204,
+            blue: 212,
             purple: 246,
             pink: 334
         };

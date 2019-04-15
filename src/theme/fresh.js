@@ -39,7 +39,7 @@ define(function(require, exports, module) {
             'sub-space': 5,
 
             'connect-color': hsl(h, 37, 60),
-            'connect-width': 1,
+            'connect-width': 2,
             'connect-radius': 5,
 
             'selected-stroke': hsl(h, 26, 30),
@@ -65,7 +65,7 @@ define(function(require, exports, module) {
         red: 0,
         soil: 25,
         green: 122,
-        blue: 204,
+        blue: 212,
         purple: 246,
         pink: 334
     };
