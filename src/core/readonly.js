@@ -55,7 +55,7 @@ define(function(require, exports, module) {
                 delete me.bkqueryCommandValue;
             }
 
-            this.setStatus('normal');
+            this.setStatus('normal', true);
 
             me._interactChange();
         }
