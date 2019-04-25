@@ -58,6 +58,9 @@ define(function(require, exports, module) {
             this.setStatus('normal', true);
 
             me._interactChange();
+        },
+        isReadonly: function() {
+            return this.getStatus() === 'readonly'
         }
     });
 });

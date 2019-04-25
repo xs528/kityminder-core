@@ -1,6 +1,6 @@
 /*!
  * ====================================================
- * Kity Minder Core - v1.4.50 - 2019-04-22
+ * Kity Minder Core - v1.4.50 - 2019-04-25
  * https://github.com/fex-team/kityminder-core
  * GitHub: https://github.com/fex-team/kityminder-core.git 
  * Copyright (c) 2019 Baidu FEX; Licensed BSD-3-Clause
@@ -2913,6 +2913,9 @@ _p[26] = {
                 }
                 this.setStatus("normal", true);
                 me._interactChange();
+            },
+            isReadonly: function() {
+                return this.getStatus() === "readonly";
             }
         });
     }
