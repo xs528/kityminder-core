@@ -19,6 +19,11 @@ define(function(require, exports, module) {
     var AppendChildCommand = kity.createClass('AppendChildCommand', {
         base: Command,
         execute: function(km, text) {
+            // 普通用户和VIP的节点数限制
+            if (window.app && window.utils.nodeLimiter()) {
+                window.app.$root.$emit('node_limit')
+                return
+            }
             var parent = km.getSelectedNode();
             if (!parent) {
                 return null;
@@ -51,6 +56,11 @@ define(function(require, exports, module) {
     var AppendSiblingCommand = kity.createClass('AppendSiblingCommand', {
         base: Command,
         execute: function(km, text) {
+            // 普通用户和VIP的节点数限制
+            if (window.app && window.utils.nodeLimiter()) {
+                window.app.$root.$emit('node_limit')
+                return
+            }
             var sibling = km.getSelectedNode();
             var parent = sibling.parent;
             if (!parent) {
@@ -102,6 +112,11 @@ define(function(require, exports, module) {
     var AppendParentCommand = kity.createClass('AppendParentCommand', {
         base: Command,
         execute: function(km, text) {
+            // 普通用户和VIP的节点数限制
+            if (window.app && window.utils.nodeLimiter()) {
+                window.app.$root.$emit('node_limit')
+                return
+            }
             var nodes = km.getSelectedNodes();
 
             nodes.sort(function(a, b) {

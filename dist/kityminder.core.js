@@ -1,9 +1,9 @@
 /*!
  * ====================================================
- * Kity Minder Core - v1.4.50 - 2019-04-25
- * https://github.com/fex-team/kityminder-core
- * GitHub: https://github.com/fex-team/kityminder-core.git 
- * Copyright (c) 2019 Baidu FEX; Licensed BSD-3-Clause
+ * Kity Minder Core - v1.4.50 - 2019-04-28
+ * https://github.com/xs528/kityminder-core
+ * GitHub: https://github.com/xs528/kityminder-core.git 
+ * Copyright (c) 2019 ; Licensed BSD-3-Clause
  * ====================================================
  */
 
@@ -6055,6 +6055,11 @@ _p[53] = {
         var AppendChildCommand = kity.createClass("AppendChildCommand", {
             base: Command,
             execute: function(km, text) {
+                // 普通用户和VIP的节点数限制
+                if (window.app && window.utils.nodeLimiter()) {
+                    window.app.$root.$emit("node_limit");
+                    return;
+                }
                 var parent = km.getSelectedNode();
                 if (!parent) {
                     return null;
@@ -6085,6 +6090,11 @@ _p[53] = {
         var AppendSiblingCommand = kity.createClass("AppendSiblingCommand", {
             base: Command,
             execute: function(km, text) {
+                // 普通用户和VIP的节点数限制
+                if (window.app && window.utils.nodeLimiter()) {
+                    window.app.$root.$emit("node_limit");
+                    return;
+                }
                 var sibling = km.getSelectedNode();
                 var parent = sibling.parent;
                 if (!parent) {
@@ -6133,6 +6143,11 @@ _p[53] = {
         var AppendParentCommand = kity.createClass("AppendParentCommand", {
             base: Command,
             execute: function(km, text) {
+                // 普通用户和VIP的节点数限制
+                if (window.app && window.utils.nodeLimiter()) {
+                    window.app.$root.$emit("node_limit");
+                    return;
+                }
                 var nodes = km.getSelectedNodes();
                 nodes.sort(function(a, b) {
                     return a.getIndex() - b.getIndex();
