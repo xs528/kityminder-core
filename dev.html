@@ -22,6 +22,9 @@
             bottom: 10px;
             right: 10px;
         }
+        canvas {
+            position: absolute;
+        }
     </style>
 
     <script type="text/javascript" src="node_modules/kity/dist/kity.js"></script>
@@ -32,11 +35,10 @@
         "root": {
             "data": {
                 "text": "爱莫脑图",
-                "image": "//stusw5.aoscdn.com/static/favicon.png",
                 "imageSize": { "width": 200, "height": 200 }
             },
             "children": [
-                { "data": { "text": "新闻" } },
+                { "data": { "text": "新闻" }, "children": [{ "data": { "text": "新闻" } }] },
                 { "data": { "text": "网页", "priority": 1 } },
                 { "data": { "text": "贴吧", "priority": 2 } },
                 { "data": { "text": "知道", "priority": 6 } },
@@ -47,7 +49,8 @@
                 { "data": { "text": "百科", "progress": 9 } },
                 { "data": { "text": "更多", "hyperlink": "https://mindmap.airmore.cn" } }
             ]
-        }
+        },
+        "theme": "dark"
     }
     </script>
 </body>

@@ -80,6 +80,7 @@ define(function(require, exports, module) {
     require('./layout/tianpan');
 
     require('./theme/default');
+    require('./theme/dark');
     require('./theme/snow');
     require('./theme/fresh');
     require('./theme/fish');

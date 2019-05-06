@@ -100,6 +100,11 @@ define(function(require, exports, module) {
             base: Command,
 
             execute: function(km) {
+                // 普通用户和VIP的节点数限制，只有Firefox走这边
+                if (window.bridge && window.bridge.nodeLimiter()) {
+                    window.bridge.openNodeLimitMsg()
+                    return
+                }
                 if (_clipboardNodes.length) {
                     var nodes = km.getSelectedNodes();
                     if (!nodes.length) return;

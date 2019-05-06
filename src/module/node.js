@@ -20,8 +20,8 @@ define(function(require, exports, module) {
         base: Command,
         execute: function(km, text) {
             // 普通用户和VIP的节点数限制
-            if (window.app && window.utils.nodeLimiter()) {
-                window.app.$root.$emit('node_limit')
+            if (window.bridge && window.bridge.nodeLimiter()) {
+                window.bridge.openNodeLimitMsg()
                 return
             }
             var parent = km.getSelectedNode();
@@ -57,8 +57,8 @@ define(function(require, exports, module) {
         base: Command,
         execute: function(km, text) {
             // 普通用户和VIP的节点数限制
-            if (window.app && window.utils.nodeLimiter()) {
-                window.app.$root.$emit('node_limit')
+            if (window.bridge && window.bridge.nodeLimiter()) {
+                window.bridge.openNodeLimitMsg()
                 return
             }
             var sibling = km.getSelectedNode();
@@ -113,8 +113,8 @@ define(function(require, exports, module) {
         base: Command,
         execute: function(km, text) {
             // 普通用户和VIP的节点数限制
-            if (window.app && window.utils.nodeLimiter()) {
-                window.app.$root.$emit('node_limit')
+            if (window.bridge && window.bridge.nodeLimiter()) {
+                window.bridge.openNodeLimitMsg()
                 return
             }
             var nodes = km.getSelectedNodes();
