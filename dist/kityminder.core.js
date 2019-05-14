@@ -1,6 +1,6 @@
 /*!
  * ====================================================
- * Kity Minder Core - v1.4.50 - 2019-05-09
+ * Kity Minder Core - v1.4.50 - 2019-05-13
  * https://github.com/xs528/kityminder-core
  * GitHub: https://github.com/xs528/kityminder-core.git 
  * Copyright (c) 2019 ; Licensed BSD-3-Clause
@@ -8210,27 +8210,19 @@ _p[66] = {
      */
         function xhrLoadImage(info, callback) {
             return Promise(function(resolve, reject) {
-                var xmlHttp = new XMLHttpRequest();
-                xmlHttp.open("GET", info.url + "&_=" + Date.now(), true);
-                xmlHttp.responseType = "blob";
-                xmlHttp.onreadystatechange = function() {
-                    if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
-                        var blob = xmlHttp.response;
-                        var image = document.createElement("img");
-                        image.src = DomURL.createObjectURL(blob);
-                        image.onload = function() {
-                            DomURL.revokeObjectURL(image.src);
-                            resolve({
-                                element: image,
-                                x: info.x,
-                                y: info.y,
-                                width: info.width,
-                                height: info.height
-                            });
-                        };
-                    }
+                var image = document.createElement("img");
+                image.crossOrigin = "anonymous";
+                image.onload = function() {
+                    DomURL.revokeObjectURL(image.src);
+                    resolve({
+                        element: image,
+                        x: info.x,
+                        y: info.y,
+                        width: info.width,
+                        height: info.height
+                    });
                 };
-                xmlHttp.send();
+                image.src = info.url + "&_=" + Date.now();
             });
         }
         function getSVGInfo(minder) {
@@ -8367,6 +8359,16 @@ _p[66] = {
                     }
                     // 非 vip 加水印
                     return drawWatermark();
+                }).then(function($image) {
+                    // 非 vip 加水印
+                    if (window.bridge && !window.bridge.isVip()) {
+                        drawImage(ctx, $image.element, canvas.width - 140 - padding, -10);
+                    }
+                    DomURL.revokeObjectURL(svgDataUrl);
+                    document.body.appendChild(canvas);
+                    var pngBase64 = generateDataUrl(canvas);
+                    document.body.removeChild(canvas);
+                    return pngBase64;
                 }, function(err) {
                     // 这里处理 reject，出错基本上是因为跨域，
                     // 出错后依然导出，只不过没有图片。
@@ -8374,18 +8376,8 @@ _p[66] = {
                     DomURL.revokeObjectURL(svgDataUrl);
                     // 非 vip 加水印
                     if (window.bridge && !window.bridge.isVip()) {
-                        drawWatermark();
-                    }
-                    document.body.appendChild(canvas);
-                    var pngBase64 = generateDataUrl(canvas);
-                    document.body.removeChild(canvas);
-                    return pngBase64;
-                }).then(function($image) {
-                    // 非 vip 加水印
-                    if (window.bridge && !window.bridge.isVip()) {
                         drawImage(ctx, $image.element, canvas.width - 140 - padding, -10);
                     }
-                    DomURL.revokeObjectURL(svgDataUrl);
                     document.body.appendChild(canvas);
                     var pngBase64 = generateDataUrl(canvas);
                     document.body.removeChild(canvas);
